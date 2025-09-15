@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Keytester</title>
+  </head>
+  <body>
+    <h1>Keytester</h1>
+    <p>Start typing:</p>
+    <pre id="log"></pre>
+    <script>
+      const log = document.getElementById("log");
+      addEventListener("keydown", (event) => {
+        if (event.key == "Enter" || event.code == "Enter") {
+          log.innerHTML += '<br>';
+        } else {
+          log.innerHTML += (event.keyCode+'•'+event.key+'•'+event.code).padStart(16, ' ');
+        }
+      });
+    </script>
+  </body>
+</html>
