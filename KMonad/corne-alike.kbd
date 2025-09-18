@@ -1,0 +1,83 @@
+(defcfg
+  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  output (uinput-sink "KMonad")
+  fallthrough true
+  allow-cmd false
+)
+
+#| --------------------------------------------------------------------------
+
+(deflayer name
+        _    _    _    _    _        _    _    _    _    _
+  _     _    _    _    _    _        _    _    _    _    _
+  _     _    _    _    _    _        _    _    _    _    _     _
+                            _        _
+
+  -------------------------------------------------------------------------- |#
+
+(defsrc
+        q    w    e    r    t        y    u    i    o    p
+  caps  a    s    d    f    g        h    j    k    l    ;
+  lsft  z    x    c    v    b        n    m    ,    .    /   rsft
+                           lalt    ralt
+)
+
+(defalias
+  hyp  C-A-S-M
+
+  S_base (around sft (layer-toggle base_shifted))
+
+  _a  q
+  _z  w
+  _e  e
+  _r  r
+  _t  t
+  _y  y
+  _u  u
+  _i  i
+  _o  o
+  _p  p
+
+  H_q  (tap-hold-next-release 2000 a @hyp)
+  A_s  (tap-hold-next-release 2000 s alt)
+  C_d  (tap-hold-next-release 2000 d ctl)
+  S_f  (tap-hold-next-release 2000 f @S_base)
+  M_g  (tap-hold-next-release 2000 g met)
+  M_h  (tap-hold-next-release 2000 h met)
+  S_j  (tap-hold-next-release 2000 j @S_base)
+  C_k  (tap-hold-next-release 2000 k ctl)
+  A_l  (tap-hold-next-release 2000 l alt)
+  H_m  (tap-hold-next-release 2000 ; @hyp)
+
+  _w   z
+  _x   x
+  _c   c
+  _v   v
+  _b   b
+  _n   n
+  _,   m
+  _.   S-,
+  _?   S-m
+  _sqt 4 ;; single quotes
+)
+
+(deflayer base
+          @_a    @_z    @_e    @_r    @_t        @_y    @_u    @_i    @_o    @_p
+  esc     @H_q   @A_s   @C_d   @S_f   @M_g       @M_h   @S_j   @C_k   @A_l   @H_m
+  @S_base @_w    @_x    @_c    @_v    @_b        @_n    @_,    @_.    @_?    @_sqt @S_base
+                                       _          _
+)
+
+(defalias
+  _;   #((release-only sft) , (press-only sft))
+  _:   #((release-only sft) . (press-only sft))
+  _!   #((release-only sft) 8 (press-only sft))
+  _dqt #((release-only sft) 3 (press-only sft)) ;; double quote
+)
+
+(deflayer base_shifted
+       _    _    _    _    _        _    _    _    _    _
+  _    _    _    _    _    _        _    _    _    _    _
+  XX   _    _    _    _    _        _    @_;  @_:  @_!  @_dqt   XX
+                           _        _
+)
