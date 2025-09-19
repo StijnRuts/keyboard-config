@@ -26,6 +26,8 @@
   hyp  C-A-S-M
 
   S_base (around sft (layer-toggle base_shifted))
+  RAISE  (layer-toggle symbols)
+  LOWER  (layer-toggle symbols)
 
   _a  q
   _z  w
@@ -59,20 +61,18 @@
   _.   S-,
   _?   S-m
   _sqt 4 ;; single quotes
+
+  _;   #((release-only sft) , (press-only sft))
+  _:   #((release-only sft) . (press-only sft))
+  _!   #((release-only sft) 8 (press-only sft))
+  _dqt #((release-only sft) 3 (press-only sft)) ;; double quote
 )
 
 (deflayer base
           @_a    @_z    @_e    @_r    @_t        @_y    @_u    @_i    @_o    @_p
   esc     @H_q   @A_s   @C_d   @S_f   @M_g       @M_h   @S_j   @C_k   @A_l   @H_m
   @S_base @_w    @_x    @_c    @_v    @_b        @_n    @_,    @_.    @_?    @_sqt @S_base
-                                       _          _
-)
-
-(defalias
-  _;   #((release-only sft) , (press-only sft))
-  _:   #((release-only sft) . (press-only sft))
-  _!   #((release-only sft) 8 (press-only sft))
-  _dqt #((release-only sft) 3 (press-only sft)) ;; double quote
+                                     @LOWER    @RAISE
 )
 
 (deflayer base_shifted
@@ -80,4 +80,52 @@
   _    _    _    _    _    _        _    _    _    _    _
   XX   _    _    _    _    _        _    @_;  @_:  @_!  @_dqt   XX
                            _        _
+)
+
+(defalias
+  S_symb (around sft (layer-toggle symbols_shifted))
+
+  _~    #((around ralt /) spc)
+  _|    (around ralt 1)
+  _und  S-=
+  _$    ]
+  _&    1
+  _%    S-'
+  _€    (around ralt e)
+  _#    (around ralt 3)
+  _at   (around ralt 2)
+  _°    S--
+
+  _fsl  S-.
+  _<    102d
+  _[    (around ralt [)
+  _lpar (tap-hold-next-release 2000 5 @S_symb)
+  _{    (around ralt 9)
+  _}    (around ralt 0)
+  _rpar (tap-hold-next-release 2000 - @S_symb)
+  _]    (around ralt ])
+  _>    S-102d
+  _bsl  (around ralt 102d)
+
+  _aigu (around ralt ')
+  _ç    9
+  _¨    S-\\
+  _^    [
+  _grav (around ralt \\)
+
+  _grav3 #((release-only sft) @_grav spc @_grav spc @_grav spc (press-only sft))
+)
+
+(deflayer symbols
+            @_~    @_|    @_und  @_$    @_&        @_%    @_€    @_#    @_at   @_°
+  _         @_fsl  @_<    @_[    @_lpar @_{        @_}    @_rpar @_]    @_>    @_bsl
+  @S_symb   @_aigu @_ç    @_¨    @_^     XX        XX     @_,    @_.    @_?    @_grav   @S_symb
+                                         _          _
+)
+
+(deflayer symbols_shifted
+       XX   XX   XX   XX   XX        XX   XX   XX   XX   XX
+  _    XX   XX   XX   XX   XX        XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX        XX   @_;  @_:  @_!  @_grav3   XX
+                            _        _
 )
