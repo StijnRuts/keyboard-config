@@ -1,56 +1,159 @@
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
 / {
-        keymap {
-                compatible = "zmk,keymap";
-
-                default_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
-                        bindings = <
-   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                  &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
-                        >;
-                };
-                lower_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
-                                    &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
-                        >;
-                };
-
-                raise_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-   &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
-   &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
-                             &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
-                        >;
-                };
-        };
+  chosen {
+    zmk,physical-layout = &foostan_corne_5col_layout;
+  };
 };
+
+
+#define DEFAULT   0
+#define S_DEFAULT 1
+#define SYMBOLS   2
+#define S_SYMBOLS 3
+#define NUM_NAV   4
+
+
+#define  ___  &trans
+#define  _x_  &none
+
+#define  HYPER  LC(LA(LS(LGUI)))
+
+
+// DEFAULT
+
+#define  RAISE  &mo SYMBOLS
+#define  LOWER  &mo NUM_NAV
+
+#define  __a  &kp Q
+#define  __z  &kp W
+#define  __e  &kp E
+#define  __r  &kp R
+#define  __t  &kp T
+#define  __y  &kp Y
+#define  __u  &kp U
+#define  __i  &kp I
+#define  __o  &kp O
+#define  __p  &kp P
+
+#define  __H_q  &mt HYPER  A
+#define  __A_s  &mt LALT   S
+#define  __C_d  &mt LCTRL  D
+#define  __S_f  &lt S_DEFAULT F
+#define  __M_g  &mt LGUI   G
+#define  __M_h  &mt LGUI   H
+#define  __S_j  &lt S_DEFAULT J
+#define  __C_k  &mt LCTRL  K
+#define  __A_l  &mt LALT   L
+#define  __H_m  &mt HYPER  SEMI
+
+#define  __w   &kp Z
+#define  __x   &kp X
+#define  __c   &kp C
+#define  __v   &kp V
+#define  __b   &kp B
+#define  __n   &kp N
+#define  __cm  &kp M     // ,
+#define  __dt  &kp COMMA // .
+#define  __qu  &kp DOT   // ?
+#define  __sq  &kp FSLH  // '
+
+#define  __ESC  &kp ESC
+#define  __RET  &kp RET
+#define  __SPC  &kp SPACE
+#define  __BSP  &kp BSPC
+
+
+// SHIFTED DEFAULT
+
+#define  __A  &kp LS(Q)
+#define  __Z  &kp LS(W)
+#define  __E  &kp LS(E)
+#define  __R  &kp LS(R)
+#define  __T  &kp LS(T)
+#define  __Y  &kp LS(Y)
+#define  __U  &kp LS(U)
+#define  __I  &kp LS(I)
+#define  __O  &kp LS(O)
+#define  __P  &kp LS(P)
+
+#define  __H_Q  &mt HYPER  LS(A)
+#define  __A_S  &mt LALT   LS(S)
+#define  __C_D  &mt LCTRL  LS(D)
+#define  __S_F  &mt LSHIFT LS(F)
+#define  __M_G  &mt LGUI   LS(G)
+#define  __M_H  &mt LGUI   LS(H)
+#define  __S_J  &mt LSHIFT LS(J)
+#define  __C_K  &mt LCTRL  LS(K)
+#define  __A_L  &mt LALT   LS(L)
+#define  __H_M  &mt HYPER  LS(SEMI)
+
+#define  __W   &kp LS(Z)
+#define  __X   &kp LS(X)
+#define  __C   &kp LS(C)
+#define  __V   &kp LS(V)
+#define  __B   &kp LS(B)
+#define  __N   &kp LS(N)
+#define  __sc  &kp LS(M) // ;
+#define  __co  &kp DOT   // :
+#define  __ex  &kp N8    // !
+#define  __dq  &kp N3    // "
+
+#define  __TAB  &kp TAB
+#define  __DEL  &kp DEL
+
+
+/ {
+  keymap {
+    compatible = "zmk,keymap";
+
+    default_layer {
+      bindings = <
+// ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+       __a       __z       __e       __r       __t           __y       __u       __i       __o       __p
+// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+     __H_q     __A_s     __C_d     __S_f     __M_g         __M_h     __S_j     __C_k     __A_l     __H_m
+// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+       __w       __x       __c       __v       __b           __n      __cm      __dt      __qu      __sq
+// ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
+                          __ESC     __RET     LOWER         RAISE     __SPC     __BSP
+//                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
+      >;
+    };
+
+    shifted_default_layer {
+      bindings = <
+// ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+       __A       __Z       __E       __R       __T           __Y       __U       __I       __O       __P
+// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+     __H_Q     __A_S     __C_D     __S_F     __M_G         __M_H     __S_J     __C_K     __A_L     __H_M
+// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+       __W       __X       __C       __V       __B           __N      __sc      __co      __ex      __dq
+// ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
+                           ___       ___       ___           ___      __TAB     __DEL
+//                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
+      >;
+    };
+
+    // symbol_layer {
+    //   bindings = <
+    //   >;
+    // };
+
+    // num_nav_layer {
+    //   bindings = <
+    //   >;
+    // };
+  };
+};
+
+// TODO:
+// Cut, Copy, Paste, Undo, Redo
+// Media and volume control
+// Screen brightness control
+// Underglow RGB control
+// BTLE control
+// Function keys
+// Printscreen

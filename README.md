@@ -15,8 +15,8 @@ west update
 
 cd app
 
-west build -d build/left -b nice_nano_v2 -- -DSHIELD=corne_left
-west build -d build/right -b nice_nano_v2 -- -DSHIELD=corne_right
+west build -d build/left -b nice_nano_v2 -- -DZMK_CONFIG=/workspaces/zmk-config -DSHIELD=corne_left
+west build -d build/right -b nice_nano_v2 -- -DZMK_CONFIG=/workspaces/zmk-config -DSHIELD=corne_right
 
 exit
 
