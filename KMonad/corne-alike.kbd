@@ -1,18 +1,10 @@
-(defcfg
-  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
-  output (uinput-sink "KMonad")
-  fallthrough true
-  allow-cmd false
-)
-
-#| --------------------------------------------------------------------------
-(deflayer name
-        _    _    _    _    _        _    _    _    _    _
-  _     _    _    _    _    _        _    _    _    _    _
-  _     _    _    _    _    _        _    _    _    _    _     _
-                            _        _
-)
-  -------------------------------------------------------------------------- |#
+;; (defcfg
+;;   input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+;;   input  (device-file "/dev/input/by-id/usb-Dell_Dell_USB_Entry_Keyboard-event-kbd")
+;;   output (uinput-sink "KMonad")
+;;   fallthrough true
+;;   allow-cmd false
+;; )
 
 (defsrc
         q    w    e    r    t        y    u    i    o    p
@@ -21,10 +13,15 @@
                            lalt    ralt
 )
 
+
 (defalias
   hyp  C-A-S-M
 
-  S_base (around sft (layer-toggle base_shifted))
+  ;; DEFAULT
+
+  S_base (around sft (layer-toggle default_shifted))
+  S_symb (around sft (layer-toggle symbols_shifted))
+
   RAISE  (layer-toggle symbols)
   LOWER  (layer-toggle num_nav)
 
@@ -61,24 +58,135 @@
   _?   S-m
   _sqt 4 ;; single quotes
 
+
+  ;; SHIFTED DEFAULT
+
   _;   #((release-only sft) , (press-only sft))
   _:   #((release-only sft) . (press-only sft))
   _!   #((release-only sft) 8 (press-only sft))
   _dqt #((release-only sft) 3 (press-only sft)) ;; double quote
+
+
+  ;; SYMBOLS
+
+  _~    #((around ralt /) spc)
+  _|    (around ralt 1)
+  _und  S-=
+  _$    ]
+  _&    1
+  _%    S-'
+  _€    (around ralt e)
+  _#    (around ralt 3)
+  _at   (around ralt 2)
+  _°    S--
+
+  _fsl  S-.
+  _<    102d
+  _[    (around ralt [)
+  _lpar (tap-hold-next-release 2000 5 @S_symb)
+  _{    (around ralt 9)
+  _}    (around ralt 0)
+  _rpar (tap-hold-next-release 2000 - @S_symb)
+  _]    (around ralt ])
+  _>    S-102d
+  _bsl  (around ralt 102d)
+
+  _aigu (around ralt ')
+  _ç    9
+  _¨    S-[
+  _^    [
+  _grav (around ralt \\)
+
+
+  ;; SHIFTED SYMBOLS
+
+  _grav3 #((release-only sft) @_grav spc @_grav spc @_grav spc (press-only sft))
+
+
+  ;; NUM_NAV
+
+  _1  S-1
+  _2  S-2
+  _3  S-3
+  _4  S-4
+  _5  S-5
+  _6  S-6
+  _7  S-7
+  _8  S-8
+  _9  S-9
+  _0  S-0
+
+  H_fsl  (tap-hold-next-release 2000 S-. @hyp)
+  A_*    (tap-hold-next-release 2000 S-] alt)
+  C_-    (tap-hold-next-release 2000 = ctl)
+  S_+    (tap-hold-next-release 2000 S-/ sft)
+  M_=    (tap-hold-next-release 2000 / met)
+  M_Le   (tap-hold-next-release 2000 left met)
+  S_Dn   (tap-hold-next-release 2000 down sft)
+  C_Up   (tap-hold-next-release 2000 up ctl)
+  A_Rg   (tap-hold-next-release 2000 right alt)
+  H_bsl  (tap-hold-next-release 2000 (around ralt 102d) @hyp)
 )
 
-(deflayer base
-          @_a    @_z    @_e    @_r    @_t        @_y    @_u    @_i    @_o    @_p
-  esc     @H_q   @A_s   @C_d   @S_f   @M_g       @M_h   @S_j   @C_k   @A_l   @H_m
-  @S_base @_w    @_x    @_c    @_v    @_b        @_n    @_,    @_.    @_?    @_sqt @S_base
-                                     @LOWER    @RAISE
+
+(deflayer default
+;;         ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+               @_a       @_z       @_e       @_r       @_t           @_y       @_u       @_i       @_o       @_p
+;;         ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      esc      @H_q      @A_s      @C_d      @S_f      @M_g          @M_h      @S_j      @C_k      @A_l      @H_m
+;;         ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+  @S_base      @_w       @_x       @_c       @_v       @_b           @_n       @_,       @_.       @_?      @_sqt     @S_base
+;;         ╰─────────┴─────────┴─────────┼─────────┼─────────╯   ╰─────────┼─────────┼─────────┴─────────┴─────────╯
+                                           @LOWER                            @RAISE
+;;                                       ╰─────────╯                       ╰─────────╯
 )
 
-(deflayer base_shifted
-       _    _    _    _    _        _    _    _    _    _
-  _    _    _    _    _    _        _    _    _    _    _
-  XX   _    _    _    _    _        _    @_;  @_:  @_!  @_dqt   XX
-                           _        _
+(deflayer default_shifted
+;;         ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+                _         _         _         _         _             _         _         _         _         _
+;;         ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      _         _         _         _         _         _             _         _         _         _         _
+;;         ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      XX        _         _         _         _         _             _        @_;       @_:       @_!       @_dqt    XX
+;;         ╰─────────┴─────────┴─────────┼─────────┼─────────╯   ╰─────────┼─────────┼─────────┴─────────┴─────────╯
+                                              _                                 _
+;;                                       ╰─────────╯                       ╰─────────╯
+)
+
+(deflayer symbols
+;;         ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+               @_~       @_|      @_und      @_$       @_&           @_%       @_€       @_#      @_at       @_°
+;;         ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      _       @_fsl      @_<       @_[     @_lpar      @_{           @_}      @_rpar     @_]      @_>       @_bsl
+;;         ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+  @S_symb     @_aigu     @_ç       @_¨       @_^       XX            XX        @_,       @_.      @_?      @_grav     @S_symb
+;;         ╰─────────┴─────────┴─────────┼─────────┼─────────╯   ╰─────────┼─────────┼─────────┴─────────┴─────────╯
+                                              _                                 _
+;;                                       ╰─────────╯                       ╰─────────╯
+)
+
+(deflayer symbols_shifted
+;;         ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+               XX        XX        XX        XX        XX            XX        XX        XX        XX        XX
+;;         ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      _        XX        XX        XX        XX        XX            XX        XX        XX        XX        XX
+;;         ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      XX       XX        XX        XX        XX        XX            XX        @_;       @_:       @_!     @_grav3     XX
+;;         ╰─────────┴─────────┴─────────┼─────────┼─────────╯   ╰─────────┼─────────┼─────────┴─────────┴─────────╯
+                                              _                                 _
+;;                                       ╰─────────╯                       ╰─────────╯
+)
+
+(deflayer num_nav
+;;         ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+               @_1       @_2       @_3       @_4       @_5           @_6       @_7       @_8       @_9       @_0
+;;         ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      _      @H_fsl      @A_*      @C_-      @S_+      @M_=          @M_Le     @S_Dn     @C_Up    @A_Rg    @H_bsl
+;;         ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      XX       @_%       @_<      @_und      @_>       XX            home      pgdn      pgup      end       XX        XX
+;;         ╰─────────┴─────────┴─────────┼─────────┼─────────╯   ╰─────────┼─────────┼─────────┴─────────┴─────────╯
+                                              _                                 _
+;;                                       ╰─────────╯                       ╰─────────╯
 )
 
 (defalias
