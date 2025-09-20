@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Keytrainer</title>
+    <style>
+      #symbol {
+        font-size: 5em;
+      }
+      #typed {
+        font-size: 3em;
+      }
+      #symbol, #typed {
+        display: inline-block;
+        width: 2em;
+        height: 2em;
+        text-align: center;
+        vertical-align: middle;
+      }
+      #symbol.success {
+        background-color: green;
+      }
+      #symbol.fail {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Keytrainer</h1>
+    <p>Type: <span id="symbol"></span> <span id="typed"></span></p>
+    <pre id="debug"></pre>
+    <script>
+      const symbol = document.getElementById("symbol");
+      const typed = document.getElementById("typed");
+      const debug = document.getElementById("debug");
+      let active = null;
+
+      let keymap = fillkeymap([
+        'f', 'j', 'd', 'k', 's', 'l', 'g', 'h', 'q', 'm',
+        'F', 'J', 'D', 'K', 'S', 'L', 'G', 'H', 'Q', 'M',
+        'r', 'u', 'e', 'i', 'z', 'o', 't', 'y', 'a', 'p',
+        'R', 'U', 'E', 'I', 'Z', 'O', 'T', 'Y', 'A', 'P',
+        'c', 'n', 'v', 'b', 'x', 'w',
+        'C', 'N', 'V', 'B', 'X', 'W',
+        ',', '.', ';', ':', '?', '!', '\'', '"'
+      ]);
+
+      function fillkeymap(keys) {
+        const total = keys.length;
+        let count = 0;
+        return keys.reduce((acc, key) => {
+          count++;
+          acc[key] = { correct:total, incorrect:total-count };
+          return acc;
+        }, {});
+      }
+
+      addEventListener("keydown", (event) => {
+        const pressed = event.key;
+        if (!Object.keys(keymap).includes(pressed)) {
+          return;
+        }
+        symbol.classList = [];
+        if (pressed == active) {
+          typed.innerHTML = "";
+          symbol.classList.add("success");
+          keymap[active].correct += 1;
+          setTimeout(pickNext, 500);
+        } else {
+          typed.innerHTML = pressed;
+          symbol.classList.add("fail");
+          keymap[active].incorrect += 1;
+        }
+        // debug.innerHTML = JSON.stringify(keymap, null, 2);
+      });
+
+      function getScore(key) {
+        const val = keymap[key];
+        return val.correct + val.incorrect === 0 ? 0 : val.correct / (val.correct + val.incorrect);
+      }
+
+      function shuffle(list) {
+        return list.sort((a, b) => Math.random() - Math.random());
+      }
+
+      function pickNext() {
+        symbol.classList = [];
+        const worstToBest = Object.keys(keymap).sort((a, b) => getScore(a) - getScore(b));
+        const randomSelected = shuffle(worstToBest.slice(0,4)).at(0);
+        if (active == randomSelected) {
+          // Don't repeat keys
+          return pickNext();
+        }
+        active = randomSelected;
+        symbol.innerHTML = active;
+      }
+
+      pickNext();
+    </script>
+  </body>
+</html>
