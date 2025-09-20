@@ -49,16 +49,16 @@
 #define  __A_l  &mt LALT   L
 #define  __H_m  &mt HYPER  SEMI
 
-#define  __w   &kp Z
-#define  __x   &kp X
-#define  __c   &kp C
-#define  __v   &kp V
-#define  __b   &kp B
-#define  __n   &kp N
-#define  __cm  &kp M     // ,
-#define  __dt  &kp COMMA // .
-#define  __qu  &kp DOT   // ?
-#define  __sq  &kp FSLH  // '
+#define  __w    &kp Z
+#define  __x    &kp X
+#define  __c    &kp C
+#define  __v    &kp V
+#define  __b    &kp B
+#define  __n    &kp N
+#define  __com  &kp M          // ,
+#define  __dot  &kp LS(COMMA)  // .
+#define  __que  &kp LS(M)      // ?
+#define  __squ  &kp N4         // '
 
 #define  __ESC  &kp ESC
 #define  __RET  &kp RET
@@ -90,22 +90,104 @@
 #define  __A_L  &mt LALT   LS(L)
 #define  __H_M  &mt HYPER  LS(SEMI)
 
-#define  __W   &kp LS(Z)
-#define  __X   &kp LS(X)
-#define  __C   &kp LS(C)
-#define  __V   &kp LS(V)
-#define  __B   &kp LS(B)
-#define  __N   &kp LS(N)
-#define  __sc  &kp LS(M) // ;
-#define  __co  &kp DOT   // :
-#define  __ex  &kp N8    // !
-#define  __dq  &kp N3    // "
+#define  __W    &kp LS(Z)
+#define  __X    &kp LS(X)
+#define  __C    &kp LS(C)
+#define  __V    &kp LS(V)
+#define  __B    &kp LS(B)
+#define  __N    &kp LS(N)
+#define  __sco  &kp COMMA  // ;
+#define  __col  &kp DOT    // :
+#define  __exc  &kp N8     // !
+#define  __dqu  &kp N3     // "
 
 #define  __TAB  &kp TAB
 #define  __DEL  &kp DEL
 
 
+// SYMBOLS
+
+// &_til macro                // ~
+#define __bar  &kp RA(N1)     // |
+#define __und  &kp LS(EQUAL)  // _
+#define __dol  &kp LBKT       // $
+#define __amp  &kp N1         // &
+#define __pro  &kp LS(SQT)    // %
+#define __eur  &kp RA(E)      // €
+#define __has  &kp RA(N3)     // #
+#define __at   &kp RA(N2)     // @
+#define __deg  &kp LS(MINUS)  // °
+
+#define __fsl  &kp LS(DOT)               // /
+#define __lt   &kp NON_US_BACKSLASH      // <
+#define __lbr  &kp RA(LBKT)              // [
+#define __lpa  &lt S_SYMBOLS N5          // (
+#define __lac  &kp RA(N9)                // {
+#define __rac  &kp RA(N0)                // }
+#define __rpa  &lt S_SYMBOLS MINUS       // )
+#define __rbr  &kp RA(RBKT)              // ]
+#define __gt   &kp LS(NON_US_BACKSLASH)  // >
+#define __bsl  &kp RA(NON_US_BACKSLASH)  // \
+
+#define __aigu  &kp RA(SQT)   // é
+#define __cce   &kp N9        // ç
+#define __trm   &kp LS(LBKT)  // ë
+#define __car   &kp LBKT      // ^
+#define __grav  &kp RA(BSLH)  // è
+
+
+// SHIFTED SYMBOLS
+
+// &_grav3 macro  // ```
+
+
+// NUMBERS & NAVIGATION
+
+#define  __1  &kp LS(N1)
+#define  __2  &kp LS(N2)
+#define  __3  &kp LS(N3)
+#define  __4  &kp LS(N4)
+#define  __5  &kp LS(N5)
+#define  __6  &kp LS(N6)
+#define  __7  &kp LS(N7)
+#define  __8  &kp LS(N8)
+#define  __9  &kp LS(N9)
+#define  __0  &kp LS(N0)
+
+#define  H_div  &mt HYPER  KP_DIVIDE
+#define  A_mul  &mt LALT   KP_MULTIPLY
+#define  C_min  &mt LCTRL  KP_MINUS
+#define  S_plu  &mt LSHIFT KP_PLUS
+#define  M_equ  &mt LGUI   KP_EQUAL
+#define  M_Le   &mt LGUI   LEFT
+#define  S_Dn   &mt LSHIFT DOWN
+#define  C_Up   &mt LCTRL  UP
+#define  A_Rg   &mt LALT   RIGHT
+#define  H_bsl  &mt HYPER  RA(NON_US_BACKSLASH)
+
+#define  __HOME   &kp HOME
+#define  __PG_DN  &kp PG_DN
+#define  __PG_UP  &kp PG_UP
+#define  __END    &kp END
+
 / {
+  macros {
+    _til: _til {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_tap &kp RA(SLASH) &kp SPACE>;
+    };
+    _grav3: _grav3 {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings
+        = <&macro_tap &kp RA(BSLH) &kp SPACE>
+        , <&macro_tap &kp RA(BSLH) &kp SPACE>
+        , <&macro_tap &kp RA(BSLH) &kp SPACE>
+        ;
+    };
+  };
+
   keymap {
     compatible = "zmk,keymap";
 
@@ -116,7 +198,7 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
      __H_q     __A_s     __C_d     __S_f     __M_g         __M_h     __S_j     __C_k     __A_l     __H_m
 // ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
-       __w       __x       __c       __v       __b           __n      __cm      __dt      __qu      __sq
+       __w       __x       __c       __v       __b           __n      __com     __dot     __que     __squ
 // ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
                           __ESC     __RET     LOWER         RAISE     __SPC     __BSP
 //                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
@@ -128,24 +210,56 @@
 // ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
        __A       __Z       __E       __R       __T           __Y       __U       __I       __O       __P
 // ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
-     __H_Q     __A_S     __C_D     __S_F     __M_G         __M_H     __S_J     __C_K     __A_L     __H_M
+      __H_Q     __A_S     __C_D     __S_F     __M_G         __M_H     __S_J     __C_K     __A_L     __H_M
 // ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
-       __W       __X       __C       __V       __B           __N      __sc      __co      __ex      __dq
+       __W       __X       __C       __V       __B           __N      __sco     __col     __exc     __dqu
 // ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
                            ___       ___       ___           ___      __TAB     __DEL
 //                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
       >;
     };
 
-    // symbol_layer {
-    //   bindings = <
-    //   >;
-    // };
+    symbol_layer {
+      bindings = <
+// ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+      &_til     __bar     __und     __dol     __amp         __pro     __eur     __has     __at      __deg
+// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      __fsl     __lt      __lbr     __lpa     __lac         __rac     __rpa     __rbr     __gt      __bsl
+// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+     __aigu     __cce     __trm     __car      _x_           _x_      __com     __dot     __que     __grav
+// ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
+                           ___       ___       ___           ___       ___       ___
+//                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
+      >;
+    };
 
-    // num_nav_layer {
-    //   bindings = <
-    //   >;
-    // };
+    shifted_symbol_layer {
+      bindings = <
+// ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+       _x_       _x_       _x_       _x_       _x_           _x_       _x_       _x_       _x_       _x_
+// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+       _x_       _x_       _x_       _x_       _x_           _x_       _x_       _x_       _x_       _x_
+// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+       _x_       _x_       _x_       _x_       _x_           _x_     __sco     __col     __exc     &_grav3
+// ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
+                           ___       ___       ___           ___       ___       ___
+//                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
+      >;
+    };
+
+    num_nav_layer {
+      bindings = <
+// ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+       __1       __2       __3       __4       __5           __6       __7       __8       __9       __0
+// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      H_div     A_mul     C_min     S_plu     M_equ          M_Le      S_Dn      C_Up      A_Rg     H_bsl
+// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
+      __pro     __lt      __und     __gt       _x_         __HOME    __PG_DN   __PG_UP    __END      _x_
+// ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
+                           ___       ___       ___           ___       ___       ___
+//                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
+      >;
+    };
   };
 };
 
