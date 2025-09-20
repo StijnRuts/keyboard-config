@@ -17,4 +17,4 @@ A basic key tester and typing trainer.
 
 # Layout
 
-![](./layout.svg)
+![](https://raw.githubusercontent.com/StijnRuts/keyboard-config/refs/heads/main/keymap.svg)
