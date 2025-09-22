@@ -81,16 +81,16 @@
   _at   (around ralt 2)
   _°    S--
 
-  _fsl  S-.
-  _<    102d
-  _[    (around ralt [)
+  _fsl  (tap-hold-next-release 2000 S-. @hyp)
+  _<    (tap-hold-next-release 2000 102d alt)
+  _[    (tap-hold-next-release 2000 (around ralt [) ctl)
   _lpar (tap-hold-next-release 2000 5 @S_symb)
-  _{    (around ralt 9)
-  _}    (around ralt 0)
+  _{    (tap-hold-next-release 2000 (around ralt 9) met)
+  _}    (tap-hold-next-release 2000 (around ralt 0) met)
   _rpar (tap-hold-next-release 2000 - @S_symb)
-  _]    (around ralt ])
-  _>    S-102d
-  _bsl  (around ralt 102d)
+  _]    (tap-hold-next-release 2000 (around ralt ]) ctl)
+  _>    (tap-hold-next-release 2000 S-102d alt)
+  _bsl  (tap-hold-next-release 2000 (around ralt 102d) @hyp)
 
   _aigu (around ralt ')
   _ç    9

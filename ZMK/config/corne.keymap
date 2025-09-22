@@ -118,16 +118,16 @@
 #define __at   &kp RA(N2)     // @
 #define __deg  &kp LS(MINUS)  // °
 
-#define __fsl  &kp LS(DOT)               // /
-#define __lt   &kp NON_US_BACKSLASH      // <
-#define __lbr  &kp RA(LBKT)              // [
-#define __lpa  &lt S_SYMBOLS N5          // (
-#define __lac  &kp RA(N9)                // {
-#define __rac  &kp RA(N0)                // }
-#define __rpa  &lt S_SYMBOLS MINUS       // )
-#define __rbr  &kp RA(RBKT)              // ]
-#define __gt   &kp LS(NON_US_BACKSLASH)  // >
-#define __bsl  &kp RA(NON_US_BACKSLASH)  // \
+#define __fsl  &mt HYPER  LS(DOT)               // /
+#define __lt   &mt LALT   NON_US_BACKSLASH      // <
+#define __lbr  &mt LCTRL  RA(LBKT)              // [
+#define __lpa  &lt S_SYMBOLS N5                 // (
+#define __lac  &mt LGUI   RA(N9)                // {
+#define __rac  &mt LGUI   RA(N0)                // }
+#define __rpa  &lt S_SYMBOLS MINUS              // )
+#define __rbr  &mt LCTRL  RA(RBKT)              // ]
+#define __gt   &mt LALT   LS(NON_US_BACKSLASH)  // >
+#define __bsl  &mt HYPER  RA(NON_US_BACKSLASH)  // \
 
 #define __aigu  &kp RA(SQT)   // é
 #define __cce   &kp N9        // ç

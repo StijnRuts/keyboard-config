@@ -24,10 +24,10 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="0.73844354"
-     inkscape:cx="593.81656"
+     inkscape:cx="593.13946"
      inkscape:cy="314.85142"
-     inkscape:window-width="1280"
-     inkscape:window-height="736"
+     inkscape:window-width="1600"
+     inkscape:window-height="836"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -1831,18 +1831,6 @@ path.combo { stroke: #7f7f7f; }
      class="key trans tap"
      id="text219">▽</text>
   <text
-     x="227.72992"
-     y="490.38562"
-     class="key hold layer-activator"
-     id="text109"
-     style="font-size:11px;text-decoration:underline;text-decoration-line:underline;dominant-baseline:auto;text-anchor:middle">SHIFT</text>
-  <text
-     x="563.72992"
-     y="490.38562"
-     class="key hold layer-activator"
-     id="text113"
-     style="font-size:11px;text-decoration:underline;text-decoration-line:underline;dominant-baseline:auto;text-anchor:middle">SHIFT</text>
-  <text
      xml:space="preserve"
      style="font-size:11px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#b2b2b2;fill-opacity:1"
      x="99.586632"
@@ -1850,4 +1838,64 @@ path.combo { stroke: #7f7f7f; }
      id="text47"><tspan
        sodipodi:role="line"
        id="tspan1" /></text>
+  <text
+     x="57.928009"
+     y="506.96399"
+     class="key hold"
+     id="text12-6"
+     style="font-size:11px;dominant-baseline:auto;text-anchor:middle">HYPER</text>
+  <text
+     x="113.92801"
+     y="492.96399"
+     class="key hold"
+     id="text14-7"
+     style="font-size:11px;dominant-baseline:auto;text-anchor:middle">ALT</text>
+  <text
+     x="169.92801"
+     y="485.96399"
+     class="key hold"
+     id="text16-5"
+     style="font-size:11px;dominant-baseline:auto;text-anchor:middle">CTRL</text>
+  <text
+     x="225.92801"
+     y="492.96399"
+     class="key hold layer-activator"
+     id="text18-3"
+     style="font-size:11px;text-decoration:underline;text-decoration-line:underline;dominant-baseline:auto;text-anchor:middle">SHIFT</text>
+  <text
+     x="281.92804"
+     y="499.96399"
+     class="key hold"
+     id="text20-5"
+     style="font-size:11px;dominant-baseline:auto;text-anchor:middle">GUI</text>
+  <text
+     x="505.92804"
+     y="499.96399"
+     class="key hold"
+     id="text22-6"
+     style="font-size:11px;dominant-baseline:auto;text-anchor:middle">GUI</text>
+  <text
+     x="561.92804"
+     y="492.96399"
+     class="key hold layer-activator"
+     id="text24-2"
+     style="font-size:11px;text-decoration:underline;text-decoration-line:underline;dominant-baseline:auto;text-anchor:middle">SHIFT</text>
+  <text
+     x="617.92804"
+     y="485.96399"
+     class="key hold"
+     id="text26-9"
+     style="font-size:11px;dominant-baseline:auto;text-anchor:middle">CTRL</text>
+  <text
+     x="673.92804"
+     y="492.96399"
+     class="key hold"
+     id="text28-1"
+     style="font-size:11px;dominant-baseline:auto;text-anchor:middle">ALT</text>
+  <text
+     x="729.92804"
+     y="506.96399"
+     class="key hold"
+     id="text30-2"
+     style="font-size:11px;dominant-baseline:auto;text-anchor:middle">HYPER</text>
 </svg>
