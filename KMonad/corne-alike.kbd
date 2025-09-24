@@ -16,15 +16,16 @@
 
 
 (defalias
+
   hyp  C-A-S-M
-
-  ;; DEFAULT
-
   S_base (around sft (layer-toggle default_shifted))
   S_symb (around sft (layer-toggle symbols_shifted))
 
   RAISE  (layer-toggle symbols)
   LOWER  (layer-toggle num_nav)
+
+
+  ;; DEFAULT
 
   _a  q
   _z  w
@@ -37,16 +38,18 @@
   _o  o
   _p  p
 
-  H_q  (tap-hold-next-release 2000 a @hyp)
-  A_s  (tap-hold-next-release 2000 s alt)
-  C_d  (tap-hold-next-release 2000 d ctl)
-  S_f  (tap-hold-next-release 2000 f @S_base)
-  M_g  (tap-hold-next-release 2000 g met)
-  M_h  (tap-hold-next-release 2000 h met)
-  S_j  (tap-hold-next-release 2000 j @S_base)
-  C_k  (tap-hold-next-release 2000 k ctl)
-  A_l  (tap-hold-next-release 2000 l alt)
-  H_m  (tap-hold-next-release 2000 ; @hyp)
+  H_q  (tap-hold 200 a @hyp)
+  A_s  (tap-hold 200 s alt)
+  C_d  (tap-hold 200 d ctl)
+  S_f  (tap-hold 200 f @S_base)
+  M_g  (tap-hold 200 g met)
+  M_h  (tap-hold 200 h met)
+  S_j  (tap-hold 200 j @S_base)
+  C_k  (tap-hold 200 k ctl)
+  A_l  (tap-hold 200 l alt)
+  H_m  (tap-hold 200 ; @hyp)
+
+;; tap-next, tap-hold, tap-hold-next, tap-next-release, tap-next-press, tap-hold-next-press, tap-hold-next-release
 
   _w   z
   _x   x
@@ -57,7 +60,7 @@
   _,   m
   _.   S-,
   _?   S-m
-  _sqt 4 ;; single quotes
+  _sqt 4
 
 
   ;; SHIFTED DEFAULT
@@ -65,7 +68,7 @@
   _;   #((release-only sft) , (press-only sft))
   _:   #((release-only sft) . (press-only sft))
   _!   #((release-only sft) 8 (press-only sft))
-  _dqt #((release-only sft) 3 (press-only sft)) ;; double quote
+  _dqt #((release-only sft) 3 (press-only sft))
 
 
   ;; SYMBOLS
@@ -81,16 +84,16 @@
   _at   (around ralt 2)
   _°    S--
 
-  _fsl  (tap-hold-next-release 2000 S-. @hyp)
-  _<    (tap-hold-next-release 2000 102d alt)
-  _[    (tap-hold-next-release 2000 (around ralt [) ctl)
-  _lpar (tap-hold-next-release 2000 5 @S_symb)
-  _{    (tap-hold-next-release 2000 (around ralt 9) met)
-  _}    (tap-hold-next-release 2000 (around ralt 0) met)
-  _rpar (tap-hold-next-release 2000 - @S_symb)
-  _]    (tap-hold-next-release 2000 (around ralt ]) ctl)
-  _>    (tap-hold-next-release 2000 S-102d alt)
-  _bsl  (tap-hold-next-release 2000 (around ralt 102d) @hyp)
+  _fsl  (tap-hold 200 S-. @hyp)
+  _<    (tap-hold 200 102d alt)
+  _[    (tap-hold 200 (around ralt [) ctl)
+  _lpar (tap-hold 200 5 @S_symb)
+  _{    (tap-hold 200 (around ralt 9) met)
+  _}    (tap-hold 200 (around ralt 0) met)
+  _rpar (tap-hold 200 - @S_symb)
+  _]    (tap-hold 200 (around ralt ]) ctl)
+  _>    (tap-hold 200 S-102d alt)
+  _bsl  (tap-hold 200 (around ralt 102d) @hyp)
 
   _aigu (around ralt ')
   _ç    9
@@ -117,16 +120,16 @@
   _9  S-9
   _0  S-0
 
-  H_fsl  (tap-hold-next-release 2000 S-. @hyp)
-  A_*    (tap-hold-next-release 2000 S-] alt)
-  C_-    (tap-hold-next-release 2000 = ctl)
-  S_+    (tap-hold-next-release 2000 S-/ sft)
-  M_=    (tap-hold-next-release 2000 / met)
-  M_Le   (tap-hold-next-release 2000 left met)
-  S_Dn   (tap-hold-next-release 2000 down sft)
-  C_Up   (tap-hold-next-release 2000 up ctl)
-  A_Rg   (tap-hold-next-release 2000 right alt)
-  H_bsl  (tap-hold-next-release 2000 (around ralt 102d) @hyp)
+  H_fsl  (tap-hold 200 S-. @hyp)
+  A_*    (tap-hold 200 S-] alt)
+  C_-    (tap-hold 200 = ctl)
+  S_+    (tap-hold 200 S-/ sft)
+  M_=    (tap-hold 200 / met)
+  M_Le   (tap-hold 200 left met)
+  S_Dn   (tap-hold 200 down sft)
+  C_Up   (tap-hold 200 up ctl)
+  A_Rg   (tap-hold 200 right alt)
+  H_bsl  (tap-hold 200 (around ralt 102d) @hyp)
 )
 
 

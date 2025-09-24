@@ -1,20 +1,25 @@
 
-# ZMK
+```sh
+podman build -t zmkbuilder -f Dockerfile ./zmk/.devcontainer
 
-[ZMK firmware](https://zmk.dev/) for my [5-column Corne chocolate v2.2](https://github.com/foostan/crkbd).
-(To be used with the host OS set to Belgian Azerty)
+podman run -it --rm \
+  --security-opt label=disable \
+  --workdir /workspaces/zmk \
+  -v ./zmk:/workspaces/zmk \
+  -v ./config:/workspaces/zmk-config \
+  -p 3000:3000 \
+  zmkbuilder /bin/bash
 
+west init -l app/
+west update
 
-# KMonad
+cd app
 
-[KMonad](https://github.com/kmonad/kmonad) config to replicate the Corne layout on an Azerty ISO keyboard.
+west build -d build/left -b nice_nano_v2 -- -DZMK_CONFIG=/workspaces/zmk-config -DSHIELD=corne_left
+west build -d build/right -b nice_nano_v2 -- -DZMK_CONFIG=/workspaces/zmk-config -DSHIELD=corne_right
 
+exit
 
-# Utilities
-
-A basic key tester and typing trainer.
-
-
-# Layout
-
-![](./layout.svg)
+cp ./zmk/app/build/left/zephyr/zmk.uf2 ./left.uf2
+cp ./zmk/app/build/right/zephyr/zmk.uf2 ./right.uf2
+```
