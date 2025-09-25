@@ -10,10 +10,8 @@
 
 
 #define DEFAULT   0
-#define S_DEFAULT 1
-#define SYMBOLS   2
-#define S_SYMBOLS 3
-#define NUM_NAV   4
+#define SYMBOLS   1
+#define NUM_NAV   2
 
 
 #define  ___  &trans
@@ -21,11 +19,11 @@
 
 #define  HYPER  LC(LA(LS(LGUI)))
 
-
-// DEFAULT
-
 #define  RAISE  &mo SYMBOLS
 #define  LOWER  &mo NUM_NAV
+
+
+// DEFAULT
 
 #define  __a  &kp Q
 #define  __z  &kp W
@@ -41,10 +39,10 @@
 #define  __H_q  &mt HYPER  A
 #define  __A_s  &mt LALT   S
 #define  __C_d  &mt LCTRL  D
-#define  __S_f  &lt S_DEFAULT F
+#define  __S_f  &mt LSHIFT F
 #define  __M_g  &mt LGUI   G
 #define  __M_h  &mt LGUI   H
-#define  __S_j  &lt S_DEFAULT J
+#define  __S_j  &mt LSHIFT J
 #define  __C_k  &mt LCTRL  K
 #define  __A_l  &mt LALT   L
 #define  __H_m  &mt HYPER  SEMI
@@ -55,54 +53,9 @@
 #define  __v    &kp V
 #define  __b    &kp B
 #define  __n    &kp N
-#define  __com  &kp M          // ,
-#define  __dot  &kp LS(COMMA)  // .
-#define  __que  &kp LS(M)      // ?
-#define  __squ  &kp N4         // '
 
 #define  __ESC  &kp ESC
 #define  __RET  &kp RET
-#define  __SPC  &kp SPACE
-#define  __BSP  &kp BSPC
-
-
-// SHIFTED DEFAULT
-
-#define  __A  &kp LS(Q)
-#define  __Z  &kp LS(W)
-#define  __E  &kp LS(E)
-#define  __R  &kp LS(R)
-#define  __T  &kp LS(T)
-#define  __Y  &kp LS(Y)
-#define  __U  &kp LS(U)
-#define  __I  &kp LS(I)
-#define  __O  &kp LS(O)
-#define  __P  &kp LS(P)
-
-#define  __H_Q  &mt HYPER  LS(A)
-#define  __A_S  &mt LALT   LS(S)
-#define  __C_D  &mt LCTRL  LS(D)
-#define  __S_F  &mt LSHIFT LS(F)
-#define  __M_G  &mt LGUI   LS(G)
-#define  __M_H  &mt LGUI   LS(H)
-#define  __S_J  &mt LSHIFT LS(J)
-#define  __C_K  &mt LCTRL  LS(K)
-#define  __A_L  &mt LALT   LS(L)
-#define  __H_M  &mt HYPER  LS(SEMI)
-
-#define  __W    &kp LS(Z)
-#define  __X    &kp LS(X)
-#define  __C    &kp LS(C)
-#define  __V    &kp LS(V)
-#define  __B    &kp LS(B)
-#define  __N    &kp LS(N)
-#define  __sco  &kp COMMA  // ;
-#define  __col  &kp DOT    // :
-#define  __exc  &kp N8     // !
-#define  __dqu  &kp N3     // "
-
-#define  __TAB  &kp TAB
-#define  __DEL  &kp DEL
 
 
 // SYMBOLS
@@ -121,10 +74,10 @@
 #define __fsl  &mt HYPER  LS(DOT)               // /
 #define __lt   &mt LALT   NON_US_BACKSLASH      // <
 #define __lbr  &mt LCTRL  RA(LBKT)              // [
-#define __lpa  &lt S_SYMBOLS N5                 // (
+#define __lpa  &mt LSHIFT N5                    // (
 #define __lac  &mt LGUI   RA(N9)                // {
 #define __rac  &mt LGUI   RA(N0)                // }
-#define __rpa  &lt S_SYMBOLS MINUS              // )
+#define __rpa  &mt LSHIFT MINUS                 // )
 #define __rbr  &mt LCTRL  RA(RBKT)              // ]
 #define __gt   &mt LALT   LS(NON_US_BACKSLASH)  // >
 #define __bsl  &mt HYPER  RA(NON_US_BACKSLASH)  // \
@@ -133,12 +86,6 @@
 #define __cce   &kp N9        // ç
 #define __trm   &kp LS(LBKT)  // ë
 #define __car   &kp LBKT      // ^
-#define __grav  &kp RA(BSLH)  // è
-
-
-// SHIFTED SYMBOLS
-
-// &_grav3 macro  // ```
 
 
 // NUMBERS & NAVIGATION
@@ -171,6 +118,51 @@
 #define  __END    &kp END
 
 / {
+  behaviors {
+    __com: __com {  // , ;
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp M>, <&kp COMMA>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+    __dot: __dot {  // . ;
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp LS(COMMA)>, <&kp DOT>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+    __que: __que {  // ? !
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp LS(M)>, <&kp N8>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+    __squ: __squ {  // ' "
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp N4>, <&kp N3>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+    __SPC: __SPC {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp SPACE>, <&kp TAB>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+    __BSP: __BSP {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp BSPC>, <&kp DEL>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+    __grav: __grav {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp RA(BSLH)>, <&_grav3>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+  };
+
   macros {
     _til: _til {
       compatible = "zmk,behavior-macro";
@@ -196,25 +188,11 @@
 // ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
        __a       __z       __e       __r       __t           __y       __u       __i       __o       __p
 // ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
-     __H_q     __A_s     __C_d     __S_f     __M_g         __M_h     __S_j     __C_k     __A_l     __H_m
+      __H_q     __A_s     __C_d     __S_f     __M_g         __M_h     __S_j     __C_k     __A_l     __H_m
 // ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
-       __w       __x       __c       __v       __b           __n      __com     __dot     __que     __squ
+       __w       __x       __c       __v       __b           __n     &__com    &__dot    &__que    &__squ
 // ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
-                          __ESC     __RET     LOWER         RAISE     __SPC     __BSP
-//                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
-      >;
-    };
-
-    shifted_default_layer {
-      bindings = <
-// ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
-       __A       __Z       __E       __R       __T           __Y       __U       __I       __O       __P
-// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
-      __H_Q     __A_S     __C_D     __S_F     __M_G         __M_H     __S_J     __C_K     __A_L     __H_M
-// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
-       __W       __X       __C       __V       __B           __N      __sco     __col     __exc     __dqu
-// ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
-                           ___       ___       ___           ___      __TAB     __DEL
+                          __ESC     __RET     LOWER         RAISE    &__SPC    &__BSP
 //                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
       >;
     };
@@ -226,21 +204,7 @@
 // ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
       __fsl     __lt      __lbr     __lpa     __lac         __rac     __rpa     __rbr     __gt      __bsl
 // ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
-     __aigu     __cce     __trm     __car      _x_           _x_      __com     __dot     __que     __grav
-// ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
-                           ___       ___       ___           ___       ___       ___
-//                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
-      >;
-    };
-
-    shifted_symbol_layer {
-      bindings = <
-// ╭─────────┬─────────┬─────────┬─────────┬─────────╮   ╭─────────┬─────────┬─────────┬─────────┬─────────╮
-       _x_       _x_       _x_       _x_       _x_           _x_       _x_       _x_       _x_       _x_
-// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
-       _x_       _x_       _x_       _x_       _x_           _x_       _x_       _x_       _x_       _x_
-// ├─────────┼─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┼─────────┤
-       _x_       _x_       _x_       _x_       _x_           _x_     __sco     __col     __exc     &_grav3
+     __aigu     __cce     __trm     __car      _x_           _x_     &__com    &__dot    &__que    &__grav
 // ╰─────────┴─────────┼─────────┼─────────┼─────────┤   ├─────────┼─────────┼─────────┼─────────┴─────────╯
                            ___       ___       ___           ___       ___       ___
 //                     ╰─────────┴─────────┴─────────╯   ╰─────────┴─────────┴─────────╯
